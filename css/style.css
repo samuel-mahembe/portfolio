@@ -2356,6 +2356,10 @@ h6 {
   cursor: not-allowed;
   z-index: 3; }
 
+.disabled-radio input:checked + label {
+  background: url(../img/elements/disabled-radio.png) no-repeat center center/cover;
+  border: none; }
+
 .unordered-list {
   list-style: none;
   padding: 0px;
@@ -3142,4 +3146,130 @@ h6 {
   .skill .skill-icon{font-size:28px}
   .skill img.skill-icon{width:40px;height:40px}
   .skill-items{justify-content:flex-start}
+}
+
+/* Work Experience timeline styles */
+.work-timeline{
+  position:relative;
+  padding:20px 0 10px 0;
+  max-width:980px;
+  margin:0 auto;
+}
+.timeline-line{
+  position:absolute;
+  left:110px;
+  top:16px;
+  bottom:16px;
+  width:3px;
+  background:linear-gradient(180deg,#e9f0ff 0%, #d6e3ff 100%);
+  border-radius:2px;
+  box-shadow:0 0 0 4px rgba(102,126,234,0.03);
+}
+.timeline-item{
+  display:flex;
+  align-items:flex-start;
+  gap:24px;
+  padding:18px 20px;
+  position:relative;
+}
+.timeline-item + .timeline-item{ margin-top:18px; }
+
+.timeline-logo{
+  width:88px;
+  min-width:88px;
+  height:88px;
+  border-radius:14px;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 6px 18px rgba(34,34,34,0.06);
+  border:1px solid rgba(102,126,234,0.08);
+  transform:translateX(-8px);
+}
+.timeline-logo img{
+  max-width:72%;
+  max-height:72%;
+  object-fit:contain;
+  display:block;
+  filter:grayscale(0.02) brightness(0.98);
+}
+
+/* card */
+.timeline-card{
+  background:#ffffff;
+  border-radius:10px;
+  padding:18px 20px;
+  box-shadow:0 12px 30px rgba(34,34,34,0.06);
+  border:1px solid rgba(30,60,120,0.04);
+  flex:1;
+  min-width:0;
+}
+.timeline-card header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+.job-title{
+  font-size:18px;
+  margin:0;
+  color:#14213d;
+  font-weight:600;
+  line-height:1.15;
+}
+.job-title .company{font-weight:500; color:#556085; font-size:15px}
+.dates{
+  color:#6b7280;
+  font-size:13px;
+  background:transparent;
+}
+
+/* achievements */
+.achievements{ margin:12px 0; padding-left:18px; color:#384154; }
+.achievements li{ margin-bottom:8px; font-size:14px; line-height:1.45; }
+
+/* tech & projects */
+.tech, .projects{
+  margin-top:10px;
+  font-size:14px;
+  color:#374151;
+}
+.projects a{
+  color:#3756d6;
+  text-decoration:none;
+  border-bottom:1px dashed rgba(55,86,214,0.12);
+}
+.projects a:focus, .projects a:hover{
+  color:#243a99;
+  text-decoration:underline;
+  outline:none;
+}
+
+/* focus styles for accessibility */
+.timeline-item:focus{
+  outline:3px solid rgba(102,126,234,0.15);
+  border-radius:12px;
+}
+
+/* vertical connector circle alignment */
+.timeline-item::before{
+  content:"";
+  position:absolute;
+  left:96px; /* center above the timeline */
+  top:28px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#fff;
+  border:3px solid #667eea;
+  box-shadow:0 6px 16px rgba(102,126,234,0.08);
+}
+
+/* responsive: stack logo above card on small screens */
+@media (max-width:767px){
+  .timeline-line{ left:20px; }
+  .timeline-item{
+    flex-direction:column;
+    align-items:flex-start;
+    padding-left:34px;
+  }
+  .timeline-logo{ width:64px; height:64px; transform:none; border-radius:10px; }
+  .timeline-item::before{ left:16px; top:18px; }
+  .timeline-card{ width:100%; margin-top:8px; padding:14px; }
 }
