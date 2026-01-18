@@ -42,6 +42,166 @@ Table of Content:
 /*Color Variables*/
 /*=================== fonts ====================*/
 @import url("https://fonts.googleapis.com/css?family=Heebo:300,400,500,700|Roboto:300,400,500,700");
+
+
+#favorites {
+  font-family: inherit;
+  padding: 48px 18px;
+
+  color: #23323a;
+}
+
+#favorites .text-center { text-align:center; margin-bottom:24px; }
+
+.favorites-grid {
+  display:flex;
+  gap:24px;
+  align-items:flex-start;
+  justify-content:center;
+  max-width:1200px;
+  margin:0 auto;
+  flex-wrap:wrap;
+}
+
+.fav-column {
+  flex:1 1 320px;
+  min-width:260px;
+}
+
+.fav-column h4 {
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:14px;
+  color:#152028;
+  text-transform:none;
+}
+
+.fav-column ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.fav-column ul li a {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  background:#fff;
+  border:1px solid rgba(18,24,28,0.06);
+  border-radius:10px;
+  box-shadow: 0 1px 4px rgba(21,32,40,0.03);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  color:#162226;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+}
+
+.fav-column ul li a::before{
+  content: "";
+  flex:0 0 48px;
+  width:48px;
+  height:48px;
+  border-radius:8px;
+  background: linear-gradient(135deg,#eef5ff 0%,#f7fbff 100%);
+  border:1px solid rgba(132,144,255,0.12);
+  box-shadow: inset 0 -4px 8px rgba(132,144,255,0.03);
+  display:block;
+}
+
+.fav-column ul li a img {
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  border-radius:8px;
+  display:block;
+  margin-right:12px;
+  flex:0 0 48px;
+}
+
+.fav-column ul li a .fav-text {
+  display:flex;
+  flex-direction:column;
+}
+.fav-column ul li a .fav-text .fav-title {
+  font-weight:500;
+  font-size:15px;
+  color:#0f1b22;
+  line-height:1.1;
+}
+.fav-column ul li a .fav-text .fav-sub {
+  font-size:13px;
+  color:#55707a;
+  margin-top:2px;
+}
+
+.fav-column ul li a:hover,
+.fav-column ul li a:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(18,24,28,0.08);
+  border-color: rgba(132,144,255,0.22);
+  outline: none;
+}
+
+.fav-column ul li a:focus {
+  box-shadow: 0 0 0 4px rgba(132,144,255,0.09);
+}
+/* 
+Per-column subtext: default "View profile", third column "View repo"
+.favorites-grid .fav-column:nth-child(1) ul li a .fav-sub,
+.favorites-grid .fav-column:nth-child(2) ul li a .fav-sub {
+  content: "";
+} */
+/* .favorites-grid .fav-column:nth-child(1) ul li a .fav-sub::before,
+.favorites-grid .fav-column:nth-child(2) ul li a .fav-sub::before { */
+  /* not used */
+/* } */
+
+/* If markup does not include .fav-text/.fav-sub, inject text via CSS */
+/* .favorites-grid .fav-column:nth-child(1) ul li a::after,
+.favorites-grid .fav-column:nth-child(2) ul li a::after {
+  content: "View profile";
+  display:block;
+  font-size:13px;
+  color:#55707a;
+  margin-top:4px;
+  margin-left:60px;
+}
+.favorites-grid .fav-column:nth-child(3) ul li a::after {
+  content: "View repo";
+  display:block;
+  font-size:13px;
+  color:#55707a;
+  margin-top:4px;
+  margin-left:60px;
+} */
+
+/* Make sure injected subtext doesn't duplicate when markup already contains .fav-sub */
+.fav-column ul li a .fav-sub { display:block; margin-left:0; }
+.fav-column ul li a .fav-text + * { margin-left:0; }
+
+@media (max-width:880px){
+  .favorites-grid { gap:16px; padding:0 8px; }
+  .fav-column { flex-basis:100%; }
+  .favorites-grid .fav-column ul li a::after,
+  .favorites-grid .fav-column:nth-child(3) ul li a::after { margin-left:60px; }
+}
+
+@media (max-width:420px){
+  .fav-column ul li a { padding:10px; gap:10px; }
+  .fav-column ul li a::after { margin-left:56px; font-size:12px; }
+  .fav-column ul li a::before, .fav-column ul li a img { width:40px; height:40px; flex:0 0 40px; }
+}
+
+/* Hide decorative square when an actual image/icon is present (modern browsers) */
+.fav-column ul li a:has(img)::before { display:none; }
+/* If markup contains explicit .fav-sub, don't inject via ::after */
+.fav-column ul li a:has(.fav-sub)::after { display:none; }
+
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 .list {
@@ -294,9 +454,41 @@ button:focus {
   background: url(../img/banner/home-banner.jpg) no-repeat scroll center center;
   background-size: cover; }
   .home_banner_area .banner_inner {
-    width: 100%; }
-    .home_banner_area .banner_inner .home_left_img {
-      padding-top:105px; }
+    width: 100%;
+  padding-top: 105px;
+padding-bottom: 20px; }
+    .home_banner_area .home_left_img {
+      padding-top:15px; 
+    width: 300px;              /* adjust size */
+  height: 300px;
+  border-radius: 70%;
+  overflow: hidden;          /* crop the image into circle */
+  margin: 0 auto;
+  border: 6px solid #e5e7eb; /* soft grey border */
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+    }
+
+    /* make the image scale nicely */
+.home_left_img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home_left_img{
+   transition: transform .25s ease, box-shadow .25s ease;
+  border: 6px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg,#cbd5e1,#e5e7eb,#f3f4f6) border-box;
+}
+.home_left_img:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+      
     .home_banner_area .banner_inner .col-lg-6 {
       vertical-align: middle;
       align-self: center; }
@@ -3063,7 +3255,7 @@ h6 {
     color: #fff; }
 
 .social_widget p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 24px;
   font-family: "Roboto", sans-serif;
   color: #777777;
@@ -3073,7 +3265,7 @@ h6 {
   display: inline-block; }
   .social_widget .list li a {
     color: #cccccc;
-    font-size: 14px;
+    font-size: 30px;
     transition: all 300ms linear 0s; }
   .social_widget .list li:last-child {
     margin-right: 0px; }
@@ -3085,6 +3277,14 @@ h6 {
   margin-top: 60px; }
   .copy_right_text p a {
     color: #8490ff; }
+
+
+    .contact_list{
+  list-style:none;
+  padding:0;
+  margin-top:10px;
+}
+
 
 /* End Footer Area css
 ============================================================================================ */
@@ -3113,8 +3313,8 @@ h6 {
 .skill p{margin:0;font-size:14px;color:#444}
 .skill .skill-icon{font-size:36px;color:#8490ff;display:block;margin:0 auto 8px}
 .skill img.skill-icon{
-  width:48px;
-  height:48px;
+  width:40px;
+  height:40px;
   object-fit:contain;
   display:block;
   margin:0 auto 8px;
@@ -3163,7 +3363,7 @@ h6 {
   width:3px;
   background:linear-gradient(180deg,#e9f0ff 0%, #d6e3ff 100%);
   border-radius:2px;
-  box-shadow:0 0 0 4px rgba(102,126,234,0.03);
+  box-shadow:0 0 0 4px rgba(99, 105, 131, 0.03);
 }
 .timeline-item{
   display:flex;
@@ -3186,6 +3386,7 @@ h6 {
   box-shadow:0 6px 18px rgba(34,34,34,0.06);
   border:1px solid rgba(102,126,234,0.08);
   transform:translateX(-8px);
+   transition: all .25s ease;
 }
 .timeline-logo img{
   max-width:72%;
@@ -3204,6 +3405,7 @@ h6 {
   border:1px solid rgba(30,60,120,0.04);
   flex:1;
   min-width:0;
+  transition: all .25s ease;
 }
 .timeline-card header{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
 .job-title{
@@ -3240,7 +3442,15 @@ h6 {
   text-decoration:underline;
   outline:none;
 }
-
+.timeline-item:hover .timeline-card{
+  transform: translateY(-4px);
+  box-shadow:0 16px 36px rgba(34,34,34,0.10);
+  border-color: rgba(30,60,120,0.10);
+}
+.timeline-item:hover .timeline-logo{
+  box-shadow:0 10px 26px rgba(55,86,214,.18);
+  transform: translateX(-8px) scale(1.03);
+}
 /* focus styles for accessibility */
 .timeline-item:focus{
   outline:3px solid rgba(102,126,234,0.15);
@@ -3248,19 +3458,7 @@ h6 {
 }
 
 /* vertical connector circle alignment */
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:96px; /* center above the timeline */
-  top:28px;
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:#fff;
-  border:3px solid #667eea;
-  box-shadow:0 6px 16px rgba(102,126,234,0.08);
-}
-
+.timeline-item::before{ display:none; }
 /* responsive: stack logo above card on small screens */
 @media (max-width:767px){
   .timeline-line{ left:20px; }
@@ -3272,4 +3470,54 @@ h6 {
   .timeline-logo{ width:64px; height:64px; transform:none; border-radius:10px; }
   .timeline-item::before{ left:16px; top:18px; }
   .timeline-card{ width:100%; margin-top:8px; padding:14px; }
+}
+.company-link{
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+.company-link:hover{
+  text-decoration: underline;
+   color:#3756d6;
+}
+
+
+/* Certifications Button Styles */
+.cert-card{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(30, 60, 120, 0.08);
+  box-shadow: 0 10px 26px rgba(34,34,34,0.05);
+}
+
+.cert-logo{
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.cert-title{
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.cert-meta{
+  margin: 2px 0 8px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.cert-link{
+  color: #3756d6;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cert-link:hover{
+  text-decoration: underline;
 }
