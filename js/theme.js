@@ -446,6 +446,30 @@
 			]
         });
     }
-	
+
+	// Skills Filter Functionality
+	$(document).ready(function() {
+		$('.skills-filter li a').on('click', function(e) {
+			e.preventDefault();
+			
+			// Get the filter value
+			var filter = $(this).parent().data('filter');
+			
+			// Update active state
+			$('.skills-filter li').removeClass('active');
+			$(this).parent().addClass('active');
+			
+			// Filter skills
+			if (filter === '*') {
+				$('.skill-category').show();
+				$('.skill').show();
+			} else {
+				// Hide all skills first
+				$('.skill').hide();
+				// Show only skills in the selected category
+				$('.skill-category' + filter).show().find('.skill').show();
+			}
+		});
+	});
 
 })(jQuery)

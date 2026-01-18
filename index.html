@@ -199,12 +199,23 @@
         		<div class="main_title">
 					<h2>Technical Skills</h2>
 				</div>
+
+				<!-- Skills Filter -->
+				<div class="skills-filter-wrapper">
+					<ul class="skills-filter list filter-pills">
+						<li class="active" data-filter="*"><a href="#" class="filter-pill">All Skills</a></li>
+						<li data-filter=".lang"><a href="#" class="filter-pill">Languages</a></li>
+						<li data-filter=".ml"><a href="#" class="filter-pill">ML & Data</a></li>
+						<li data-filter=".framework"><a href="#" class="filter-pill">Frameworks</a></li>
+										</ul>
+				</div>
+
 				<div class="feature_inner row">
 					<div class="col-lg">
         				<div class="tools_expert">
-							<div class="skills-categories">
-								<div class="skill-category">
-									<h5 class="category-title">Programming Languages</h5>
+							<div class="skills-categories" id="skills-grid">
+								<!-- Programming Languages -->
+								<div class="skill-category lang" data-category="lang">
 									<div class="skill-items">
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/python.png" alt="Python">
@@ -226,11 +237,11 @@
 											<img class="skill-icon" src="img/icons/c-sharp.png" alt="C#">
 											<p>C#</p>
 										</div>
-									
 									</div>
 								</div>
-								<div class="skill-category">
-									<h5 class="category-title">Machine Learning & Data Visualization</h5>
+
+								<!-- ML & Data Visualization -->
+								<div class="skill-category ml" data-category="ml">
 									<div class="skill-items">
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/pandas.png" alt="Pandas">
@@ -251,11 +262,12 @@
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/tablue.png" alt="Tableau">
 											<p>Tableau</p>
-										</div>							
+										</div>
 									</div>
 								</div>
-								<div class="skill-category">
-									<h5 class="category-title">Frameworks & Platforms</h5>
+
+								<!-- Frameworks & Platforms -->
+								<div class="skill-category framework" data-category="framework">
 									<div class="skill-items">
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/fastapi.jpg" alt="FastAPI">
@@ -264,7 +276,7 @@
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/spring.png" alt="Spring">
 											<p>Spring Boot</p>
-										</div>										
+										</div>
 										<div class="skill text-center">
 											<img class="skill-icon" src="img/icons/angular.png" alt="Angular">
 											<p>Angular</p>
@@ -279,99 +291,27 @@
 										</div>
 									</div>
 								</div>
-								<!-- <div class="skill-category">
-									<h5 class="category-title">Databases</h5>
-									<div class="skill-items">
-									<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/mysql.png" alt="MySQL">
-											<p>MySQL</p>
-										</div> 
-										
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/postgrace.png" alt="PostgreSQL">
-											<p>PostgreSQL</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/oracle.png" alt="Oracle">
-											<p>Oracle</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/snowflake.png" alt="Snowflake">
-											<p>Snowflake</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/neo4j.png" alt="Neo4j">
-											<p>Neo4j</p>
-										</div>
-									</div>
-								</div>
-								<div class="skill-category">
-									<h5 class="category-title">Tools</h5>
-									<div class="skill-items">
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/spring.png" alt="Spring">
-											<p>Spring Boot</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/fastapi.jpg" alt="FastAPI">
-											<p>FastAPI</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/angular.png" alt="Angular">
-											<p>Angular</p>
-										</div>
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/mysql.png" alt="MySQL">
-											<p>MySQL</p>
-										</div> 
-										<div class="skill text-center">
-											<img class="skill-icon" src="img/icons/snowflake.png" alt="Snowflake">
-											<p>Snowflake</p>
-										</div>
+
+								<!-- Competencies - COMMENTED OUT -->
+								<!-- <div class="skill-category comp" data-category="comp">
+									<div class="skill-competancies">
+										<div class="competency">Machine Learning & Model Development</div>
+										<div class="competency">Data Cleaning & Feature Engineering</div>
+										<div class="competency">Exploratory Data Analysis (EDA)</div>
+										<div class="competency">API Design & Backend Development</div>
+										<div class="competency">Database Design & Query Optimization</div>
+										<div class="competency">Dashboard Design & Data Storytelling</div>
+										<div class="competency">Cloud-Based Application Deployment</div>
+										<div class="competency">Agile & Cross-Functional Collaboration</div>
 									</div>
 								</div> -->
-								<h5 class="category-title">Competencies</h5>
-									<div class="skill-competancies">
 
-									<div class="competency">
-										Machine Learning & Model Development
-									</div>
-
-									<div class="competency">
-										Data Cleaning & Feature Engineering
-									</div>
-
-									<div class="competency">
-										Exploratory Data Analysis (EDA)
-									</div>
-
-									<div class="competency">
-										API Design & Backend Development
-									</div>
-
-									<div class="competency">
-										Database Design & Query Optimization
-									</div>
-
-									<div class="competency">
-										Dashboard Design & Data Storytelling
-									</div>
-
-									<div class="competency">
-										Cloud-Based Application Deployment
-									</div>
-
-									<div class="competency">
-										Agile & Cross-Functional Collaboration
-									</div>
-
-									</div>
-
-								<p class="text-center mt-3">
-  See more of my skills
-  <a href="https://github.com/yourprofile" target="_blank">GitHub profile</a>.
-</p>
+							
 							</div>
+								<p class="text-center mt-3" style="grid-column: 1/-1;">
+									See more of my skills
+									<a href="https://github.com/yourprofile" target="_blank">GitHub profile</a>.
+								</p>
         				</div>
         			</div>
 				</div>
