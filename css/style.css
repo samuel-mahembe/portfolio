@@ -451,6 +451,39 @@ button:focus {
 ============================================================================================ */
 .home_banner_area {
   z-index: 1;
+  :root{ --navbar-height:72px; }
+  .header_area{ position:fixed; top:0; left:0; right:0; z-index:1030; background: rgba(255,255,255,0.96); backdrop-filter: saturate(120%) blur(4px); box-shadow: 0 2px 8px rgba(12,24,40,0.04); }
+  body{ padding-top: var(--navbar-height); }
+  .header_area .navbar{ padding:0.5rem 0; }
+
+  @media (min-width: 992px){
+    :root{ --navbar-height:72px; }
+    .sm-logo{ display:none !important; }
+    .navbar-collapse{ justify-content:center; }
+    .navbar-nav{ display:flex; align-items:center; gap:20px; }
+    .navbar-toggler{ display:none !important; }
+    .menu_nav .nav-link{ color:#24323a; padding:8px 10px; font-weight:500; }
+    .menu_nav .nav-link.active{ color:#0069d9; border-bottom:3px solid #0069d9; padding-bottom:6px; }
+  }
+
+  @media (max-width: 991.98px){
+    :root{ --navbar-height:64px; }
+    .sm-logo{ display:block; }
+    .navbar-brand img{ height:40px; width:40px; border-radius:50%; object-fit:contain; }
+    .menu_nav{ flex-direction:column; padding:7px 0; }
+    .menu_nav .nav-link{ padding:10px 14px; }
+  }
+
+  /* make sure anchor jumps are sm ooth where native behavior is available */
+  html{ scroll-behavior: smooth; }
+
+  /* subtle focus and active styles */
+  .menu_nav .nav-link:focus{ outline:2px solid rgba(0,105,217,0.12); outline-offset:4px; }
+
+  /* small tweak so page content doesn't shift when header becomes fixed */
+  @media (min-width:1200px){
+    body{ padding-top: var(--navbar-height); }
+  }
   background: url(../img/banner/home-banner.jpg) no-repeat scroll center center;
   background-size: cover; }
   .home_banner_area .banner_inner {
@@ -3862,4 +3895,13 @@ h6 {
 
 .cert-link:hover{
   text-decoration: underline;
+}
+
+/* Small override: bring SM logo closer to nav links on small screens */
+.nav-pill-wrapper .navbar-brand{
+  margin-right:8px;
+  display:block;
+}
+@media (min-width: 992px){
+  .nav-pill-wrapper .navbar-brand{ display:none !important; }
 }

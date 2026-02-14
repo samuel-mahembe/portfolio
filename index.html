@@ -4,7 +4,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="img/banner/sm.png" type="image/png">
         <title>Samuel Mahembe - Portfolio </title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -23,33 +23,38 @@
     <body>
         
         <!--================Header Menu Area =================-->
-        <header class="header_area">
-            <div class="main_menu" id="mainNav">`
-            	<nav class="navbar navbar-expand-lg navbar-light">
-					<div class="container box_1620">
-						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<header class="header_area">
+			<div class="main_menu" id="mainNav">
+				<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container box_1620 d-flex align-items-center nav-pill-wrapper">
+						<!-- Brand (small screens only) -->
+						<a class="navbar-brand logo_h sm-logo" href="index.html"><img src="img/banner/sm.png" width="62" height="40" alt="SM"></a>
+
+						<!-- Centered nav on desktop, collapsible on small screens -->
+						<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav">
+								<li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+								<li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+								<li class="nav-item"><a class="nav-link" href="#work-experience">Experience</a></li>
+								<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+							</ul>
+						</div>
+
+						<!-- Toggler on small screens (right) -->
+						<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
-								<li class="nav-item"><a class="nav-link" href="about-us.html">Projects</a></li> 
-								<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-							</ul>
-						</div> 
 					</div>
-            	</nav>
-            </div>
-        </header>
+				</nav>
+			</div>
+		</header>
         <!--================Header Menu Area =================-->
         
         <!--================Home Banner Area =================-->
-        <section class="home_banner_area">
+		<section id="home" class="home_banner_area">
             <div class="banner_inner">
 				<div class="container">
 					<div class="row">
@@ -73,7 +78,7 @@
         <!--================End Home Banner Area =================-->
 
 		    <!--================Projects Area =================-->
-        <section class="projects_area p_120">
+		<section id="projects" class="projects_area p_120">
         	<div class="container">
         		<div class="main_title">
 					<h2>Projects</h2>
@@ -194,7 +199,7 @@
         <!--================End Projects Area =================-->
 
 	    <!--================Technical Skills Area =================-->
-		<section class="projects_area p_90">
+		<section id="skills" class="projects_area p_90">
         	<div class="container">
         		<div class="main_title">
 					<h2>Technical Skills</h2>
@@ -807,5 +812,45 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
         <script src="js/gmaps.min.js"></script>
         <script src="js/theme.js"></script>
+				<script>
+				document.addEventListener('DOMContentLoaded', function(){
+					const navbar = document.querySelector('.header_area');
+					function navbarHeight(){ return navbar ? navbar.offsetHeight : 72; }
+
+					// Smooth scroll for in-page nav links
+					document.querySelectorAll('a.nav-link[href^="#"]').forEach(link=>{
+						link.addEventListener('click', function(e){
+							const targetId = this.getAttribute('href').slice(1);
+							const target = document.getElementById(targetId);
+							if(target){
+								e.preventDefault();
+								const y = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight() - 8;
+								window.scrollTo({top: y, behavior: 'smooth'});
+								// close bootstrap collapse on small screens (if open)
+								if(typeof $ === 'function') $('.navbar-collapse').collapse('hide');
+							}
+						});
+					});
+
+					// Active link while scrolling
+					const sections = Array.from(document.querySelectorAll('section[id], footer[id]'));
+					let observer;
+					function createObserver(){
+						const rootMarginTop = `-${Math.round(navbarHeight())}px 0px -${Math.round(window.innerHeight/2)}px 0px`;
+						if(observer) observer.disconnect();
+						observer = new IntersectionObserver((entries)=>{
+							entries.forEach(entry=>{
+								if(entry.isIntersecting){
+									const id = entry.target.id;
+									document.querySelectorAll('.nav-link').forEach(a=> a.classList.toggle('active', a.getAttribute('href')===`#${id}`));
+								}
+							});
+						}, {root:null, rootMargin: rootMarginTop, threshold: 0.15});
+						sections.forEach(s=>observer.observe(s));
+					}
+					createObserver();
+					window.addEventListener('resize', ()=>{ setTimeout(createObserver,120); });
+				});
+				</script>
     </body>
 </html>
