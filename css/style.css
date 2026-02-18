@@ -609,6 +609,12 @@ padding-bottom: 20px; }
     z-index: 1; }
     .banner_area .banner_inner .banner_content {
       margin-top: 70px; }
+      .banner_area .banner_inner .banner_content p {
+        color: #2f2f2f;
+        font-size: 26px;
+        font-family: "Heebo", sans-serif;
+        margin-bottom: 0px;
+      }
       .banner_area .banner_inner .banner_content h2 {
         color: #222222;
         font-size: 36px;
