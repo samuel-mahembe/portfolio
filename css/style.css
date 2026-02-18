@@ -3905,3 +3905,77 @@ h6 {
 @media (min-width: 992px){
   .nav-pill-wrapper .navbar-brand{ display:none !important; }
 }
+
+
+.hero-social {
+  margin-top: 25px;
+}
+
+.connect-text {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #24323a;
+}
+
+.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.social-icons li {
+  display: inline-block;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: #f4f6f9;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* LinkedIn */
+.social-icons a.linkedin {
+    background: #0A66C2;
+  color: white;
+}
+
+.social-icons a.linkedin:hover {
+  background: #0A66C2;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* GitHub */
+.social-icons a.github {
+   background: #24292e;
+  color: white;
+}
+
+.social-icons a.github:hover {
+  background: #24292e;
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Email */
+.social-icons a.email {
+  background: #EA4335;
+  color: white;
+}
+
+.social-icons a.email:hover {
+  background: #EA4335;
+  color: white;
+  transform: translateY(-3px);
+}
