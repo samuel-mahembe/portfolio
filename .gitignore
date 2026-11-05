@@ -3,3 +3,12 @@
 
 # Resume source contains a phone number. Publish only an approved copy from public/.
 Samuel_Mahembe.pdf
+
+# Astro
+dist/
+.astro/
+node_modules/
+npm-debug.log*
+.env
+.env.production
+.DS_Store

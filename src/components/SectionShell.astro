@@ -1,0 +1,20 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  heading: string;
+}
+
+const { id, label, heading } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section id={id} aria-labelledby={headingId} class="border-line border-t py-16 md:py-24">
+  <div class="container-page grid gap-6 md:grid-cols-12 md:gap-8">
+    <p class="type-label md:col-span-3"><span class="text-accent" aria-hidden="true">// </span>{label}</p>
+    <div class="min-w-0 md:col-span-9">
+      <h2 id={headingId} class="type-h2">{heading}</h2>
+      <div class="mt-6"><slot /></div>
+    </div>
+  </div>
+</section>

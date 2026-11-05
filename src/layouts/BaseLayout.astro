@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource/instrument-serif';
+import '../styles/global.css';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Samuel Mahembe, Software Engineer',
+  description = 'Software engineer building data and transaction systems. Open to full-time Software Engineering and Data Engineering roles.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Runs before first paint so the page never flashes the wrong theme. -->
+    <script is:inline>
+      (function () {
+        var saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch (e) {}
+        var prefersLight = matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = saved || (prefersLight ? 'light' : 'dark');
+      })();
+    </script>
+  </head>
+  <body class="bg-bg text-ink">
+    <a
+      href="#main"
+      class="type-label bg-accent text-on-accent! fixed top-2 left-2 z-50 -translate-y-20 rounded-sm px-3 py-2 focus:translate-y-0"
+    >
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>

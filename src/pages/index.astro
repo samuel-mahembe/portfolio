@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionShell from '../components/SectionShell.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+---
+
+<BaseLayout>
+  <header class="container-page flex h-16 items-center justify-between">
+    <a href={import.meta.env.BASE_URL} class="font-medium tracking-tight">Samuel Mahembe</a>
+    <ThemeToggle />
+  </header>
+
+  <main id="main">
+    <div class="container-page pt-16 pb-20 md:pt-28 md:pb-32">
+      <p class="type-label"><span class="text-accent" aria-hidden="true">// </span>greater.boston</p>
+      <h1 class="type-display mt-6 max-w-[16ch]">I build systems that move money and data reliably.</h1>
+      <p class="type-h3 mt-8">Software Engineer, Data and Transaction Systems</p>
+      <p class="type-lead mt-4">
+        Software engineer with 3+ years building enterprise platforms that handle high-volume transactional and
+        operational data across telecommunications, payments, and internal business operations. Now focused on data
+        engineering: pipelines, data models, and cloud data platforms.
+      </p>
+    </div>
+
+    <SectionShell id="about" label="01.about" heading="About">
+      <div class="space-y-5">
+        <p class="type-body">
+          I started out building enterprise applications at TelOne Zimbabwe, then spent three years at Econet Wireless
+          Zimbabwe working across backend, frontend, APIs, databases, and mobile. Much of that work sat close to
+          revenue: recharge platforms, voucher systems, and the transaction data behind them.
+        </p>
+        <p class="type-body">
+          Supporting dashboards and data models at Econet showed me how much depends on the data underneath. That is
+          the direction I am moving in now: pipelines, data models, and cloud data platforms, built with the same care
+          for reliability as a payment system.
+        </p>
+      </div>
+    </SectionShell>
+
+    <SectionShell id="work" label="02.selected.work" heading="Selected Work">
+      <p class="type-label">Layout only. Built in Phase 4.</p>
+    </SectionShell>
+    <SectionShell id="experience" label="03.experience" heading="Experience">
+      <p class="type-label">Layout only. Built in Phase 4.</p>
+    </SectionShell>
+    <SectionShell id="skills" label="04.skills" heading="Skills, Education, Certifications">
+      <p class="type-label">Layout only. Built in Phase 4.</p>
+    </SectionShell>
+    <SectionShell id="contact" label="05.contact" heading="Get in touch">
+      <p class="type-label">Layout only. Built in Phase 4.</p>
+    </SectionShell>
+    <SectionShell id="lab" label="06.lab" heading="Payment stream simulator">
+      <p class="type-label">Layout only. Built in Phase 6.</p>
+    </SectionShell>
+  </main>
+</BaseLayout>
