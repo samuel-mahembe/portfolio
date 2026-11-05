@@ -29,9 +29,13 @@
       { rootMargin: '0px 0px -8% 0px' },
     );
 
-    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
-      // Anything already on screen, or above it after a restored scroll, stays put.
-      if (el.getBoundingClientRect().top < window.innerHeight) return;
+    // Read every position first, then write, so this costs one layout and not one per block.
+    // Anything already on screen, or above it after a restored scroll, stays put.
+    const viewportHeight = window.innerHeight;
+    const below = [...document.querySelectorAll<HTMLElement>('[data-reveal]')].filter(
+      (el) => el.getBoundingClientRect().top >= viewportHeight,
+    );
+    below.forEach((el) => {
       el.classList.add('reveal-pending');
       observer.observe(el);
     });

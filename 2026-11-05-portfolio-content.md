@@ -225,7 +225,7 @@ Note: this matches the three certifications shown on the old site.
 
 Omitted unless real links are provided. See question 2.
 
-## 05 Contact
+## 06 Contact
 
 **Heading:** Get in touch
 
@@ -237,7 +237,7 @@ Omitted unless real links are provided. See question 2.
 
 **Footer:** Samuel Mahembe, Greater Boston
 
-## 06 Lab
+## 05 Lab
 
 **Heading:** Payment stream simulator
 
@@ -251,7 +251,7 @@ Omitted unless real links are provided. See question 2.
 
 **How it works:** This demo scores transactions in your browser and is not a production model. For how I approach real payment systems, see the PayFlow case study.
 
-Note: the plan orders the sections with Lab as 06 and Contact as 05. It may read better with Contact last. I can settle this in Phase 6.
+Note: settled in Phase 6. Lab is 05 and Contact is 06, so Contact closes the page.
 
 ## 404 page
 

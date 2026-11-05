@@ -7,6 +7,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Reveal from '../components/Reveal.astro';
 import { withBase } from '../lib/paths';
+import displayFont from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import bodyFont from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -17,6 +19,9 @@ const {
   title = 'Samuel Mahembe, Software Engineer',
   description = 'Software engineer building data and transaction systems. Open to full-time Software Engineering and Data Engineering roles.',
 } = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(withBase('og.png'), Astro.site);
 ---
 
 <!doctype html>
@@ -26,7 +31,24 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={pageUrl} />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0e0c" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafaf8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Samuel Mahembe" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Samuel Mahembe. I build systems that move money and data reliably." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     <meta name="generator" content={Astro.generator} />
     <!-- Runs before first paint so the page never flashes the wrong theme. -->
@@ -40,6 +62,42 @@ const {
         document.documentElement.dataset.theme = saved || (prefersLight ? 'light' : 'dark');
       })();
     </script>
+    {
+      import.meta.env.PROD && (
+        <>
+          <!-- The tag is heavy, so it loads on first interaction or shortly after the page settles. -->
+          <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-RLXSZX3Z6Z');
+            (function () {
+              var events = ['pointerdown', 'keydown', 'scroll'];
+              var loaded = false;
+              function loadTag() {
+                if (loaded) return;
+                loaded = true;
+                events.forEach(function (name) {
+                  removeEventListener(name, loadTag);
+                });
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-RLXSZX3Z6Z';
+                document.head.appendChild(script);
+              }
+              events.forEach(function (name) {
+                addEventListener(name, loadTag, { once: true, passive: true });
+              });
+              addEventListener('load', function () {
+                setTimeout(loadTag, 4000);
+              });
+            })();
+          </script>
+        </>
+      )
+    }
   </head>
   <body class="bg-bg text-ink">
     <a
