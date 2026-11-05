@@ -10,7 +10,7 @@ const { company, role, start, end, location, volunteer, platforms, tech } = entr
 const { Content } = await render(entry);
 ---
 
-<li class="timeline-item">
+<li data-reveal class="timeline-item">
   <p class="type-label">{start} to {end}, {location}</p>
   <h3 class="type-h3 mt-2">{company}</h3>
   <p class="text-muted">{role}{volunteer && ' (volunteer)'}</p>

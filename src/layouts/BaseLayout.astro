@@ -5,6 +5,7 @@ import '@fontsource/instrument-serif';
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import Reveal from '../components/Reveal.astro';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -50,5 +51,6 @@ const {
     <SiteHeader />
     <slot />
     <SiteFooter />
+    <Reveal />
   </body>
 </html>

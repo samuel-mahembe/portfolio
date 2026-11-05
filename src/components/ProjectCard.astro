@@ -15,7 +15,7 @@ const shown = stack.slice(0, STACK_SHOWN);
 const hidden = stack.length - shown.length;
 ---
 
-<article class:list={['card', { 'card-linked': href }]}>
+<article data-reveal class:list={['card', { 'card-linked': href }]}>
   <p class="type-label">{tag}</p>
   <h3 class="type-h3 mt-3">
     {

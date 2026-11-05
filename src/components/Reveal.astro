@@ -1,0 +1,39 @@
+<script>
+  // Fade-and-rise on first scroll into view, once only.
+  // Blocks are hidden here, not in the HTML, so content stays visible if this script never runs.
+  const STAGGER_MS = 50;
+  const MAX_STAGGER_STEPS = 3;
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    const finish = (el: HTMLElement) => {
+      el.classList.remove('reveal-running');
+      el.style.transitionDelay = '';
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const arriving = entries.filter((entry) => entry.isIntersecting);
+        arriving.forEach((entry, index) => {
+          const el = entry.target as HTMLElement;
+          observer.unobserve(el);
+          el.style.transitionDelay = `${Math.min(index, MAX_STAGGER_STEPS) * STAGGER_MS}ms`;
+          el.classList.add('reveal-running');
+          el.classList.remove('reveal-pending');
+          el.addEventListener('transitionend', () => finish(el), { once: true });
+          // Fallback, in case the transition is interrupted and never ends.
+          setTimeout(() => finish(el), 900);
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+
+    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+      // Anything already on screen, or above it after a restored scroll, stays put.
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      el.classList.add('reveal-pending');
+      observer.observe(el);
+    });
+  }
+</script>

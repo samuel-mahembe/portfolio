@@ -8,7 +8,7 @@ const resumeHref = getResumeHref();
 const links = site.nav.map((item) => ({ label: item.label, href: withBase(`#${item.hash}`) }));
 ---
 
-<header class="site-header border-line bg-bg sticky top-0 z-40 border-b">
+<header class="site-header [view-transition-name:site-header] border-line bg-bg sticky top-0 z-40 border-b">
   <div class="container-page flex h-16 items-center justify-between gap-6">
     <a href={withBase()} class="nav-link text-ink! font-medium tracking-tight whitespace-nowrap">{site.name}</a>
 
