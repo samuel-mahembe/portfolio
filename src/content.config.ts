@@ -8,6 +8,8 @@ const projects = defineCollection({
     title: z.string(),
     summary: z.string(),
     status: z.string(),
+    /** Short label shown on the card. */
+    tag: z.string(),
     /** Lower numbers appear first. */
     order: z.number(),
     flagship: z.boolean().default(false),

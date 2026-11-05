@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, tag, stack, upcoming } = project.data;
+const href = upcoming ? null : withBase(`projects/${project.id}/`);
+
+const STACK_SHOWN = 6;
+const shown = stack.slice(0, STACK_SHOWN);
+const hidden = stack.length - shown.length;
+---
+
+<article class:list={['card', { 'card-linked': href }]}>
+  <p class="type-label">{tag}</p>
+  <h3 class="type-h3 mt-3">
+    {
+      href ? (
+        <a href={href} class="card-title-link" style={`view-transition-name: project-${project.id}`}>
+          {title}
+        </a>
+      ) : (
+        title
+      )
+    }
+  </h3>
+  <p class="type-body mt-3">{summary}</p>
+  <p class="type-label mt-5">
+    {shown.join(', ')}{hidden > 0 && `, and ${hidden} more`}
+  </p>
+  {href && <p class="card-action type-label mt-5">Read case study</p>}
+</article>

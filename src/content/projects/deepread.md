@@ -3,6 +3,7 @@ title: DeepRead
 summary: A RAG app that lets people bring their own knowledge base from web pages or uploaded documents, then ask questions and get answers that cite their sources.
 status: Public on GitHub, runs locally or with Docker.
 order: 2
+tag: RAG application
 stack:
   - Python
   - LangChain text splitters

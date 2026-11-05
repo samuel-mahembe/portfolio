@@ -1,0 +1,34 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'experience'>;
+}
+
+const { entry } = Astro.props;
+const { company, role, start, end, location, volunteer, platforms, tech } = entry.data;
+const { Content } = await render(entry);
+---
+
+<li class="timeline-item">
+  <p class="type-label">{start} to {end}, {location}</p>
+  <h3 class="type-h3 mt-2">{company}</h3>
+  <p class="text-muted">{role}{volunteer && ' (volunteer)'}</p>
+  <div class="prose mt-4"><Content /></div>
+  {
+    platforms.length > 0 && (
+      <>
+        <h4 class="type-label text-ink! mt-6">Platforms</h4>
+        <dl class="mt-2 space-y-2">
+          {platforms.map((platform) => (
+            <div class="type-body">
+              <dt class="text-ink inline">{platform.name}: </dt>
+              <dd class="inline">{platform.description}</dd>
+            </div>
+          ))}
+        </dl>
+      </>
+    )
+  }
+  {tech.length > 0 && <p class="type-label mt-6">{tech.join(', ')}</p>}
+</li>

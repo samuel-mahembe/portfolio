@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+import { withBase } from '../lib/paths';
+import { getResumeHref } from '../lib/resume';
+
+const resumeHref = getResumeHref();
+---
+
+<section aria-labelledby="hero-heading" class="container-page pt-16 pb-20 md:pt-28 md:pb-32">
+  <p class="type-label"><span class="text-accent" aria-hidden="true">// </span>greater.boston</p>
+  <h1 id="hero-heading" class="type-display mt-6 max-w-[16ch]">I build systems that move money and data reliably.</h1>
+  <p class="type-h3 mt-8">{site.role}</p>
+  <p class="type-lead mt-4">
+    Software engineer with 3+ years building enterprise platforms that handle high-volume transactional and operational
+    data across telecommunications, payments, and internal business operations. Now focused on data engineering:
+    pipelines, data models, and cloud data platforms.
+  </p>
+  <div class="mt-10 flex flex-wrap gap-3">
+    <a href={withBase('#work')} class="btn btn-primary">View work</a>
+    {resumeHref && <a href={resumeHref} class="btn btn-secondary">Resume PDF</a>}
+  </div>
+</section>

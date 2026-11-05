@@ -5,6 +5,7 @@ title: Customer Churn Analytics Dashboard
 summary: A telecom churn analysis and Tableau dashboard that shows what drives customers to leave.
 status: Academic project
 order: 4
+tag: Academic project
 stack:
   - Python
   - Jupyter

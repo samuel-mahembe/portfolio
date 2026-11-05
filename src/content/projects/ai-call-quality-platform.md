@@ -6,6 +6,7 @@ title: AI-Powered Call Quality Platform
 summary: A call recording and analysis app with real-time transcription and summarization.
 status: To be confirmed
 order: 3
+tag: Call analysis
 draft: true
 stack:
   - Python

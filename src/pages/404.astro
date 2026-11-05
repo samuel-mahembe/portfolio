@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+---
+
+<BaseLayout title="Page not found, Samuel Mahembe" description="This page does not exist or has moved.">
+  <main id="main" class="container-page py-24 md:py-40">
+    <p class="type-label"><span class="text-accent" aria-hidden="true">// </span>404</p>
+    <h1 class="type-page-title mt-4">Page not found</h1>
+    <p class="type-lead mt-5">This page does not exist or has moved.</p>
+    <a href={withBase()} class="btn btn-secondary mt-10">Back to home</a>
+  </main>
+</BaseLayout>

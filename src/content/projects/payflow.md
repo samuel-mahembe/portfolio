@@ -3,6 +3,7 @@ title: PayFlow
 summary: "A simulated, distributed payment platform built to work through the problems that matter in transaction systems: duplicate requests, partial failures, and consistency across services."
 status: Portfolio project, runs locally. No real money, cards, or financial credentials are processed.
 order: 1
+tag: Flagship project
 flagship: true
 stack:
   - Java 21

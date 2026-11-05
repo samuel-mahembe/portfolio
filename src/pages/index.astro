@@ -1,26 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionShell from '../components/SectionShell.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceEntry from '../components/ExperienceEntry.astro';
+import { site, skills, education, certifications } from '../data/site';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const linkedinHandle = site.linkedin.replace('https://www.', '');
+const githubHandle = site.github.replace('https://', '');
 ---
 
 <BaseLayout>
-  <header class="container-page flex h-16 items-center justify-between">
-    <a href={import.meta.env.BASE_URL} class="font-medium tracking-tight">Samuel Mahembe</a>
-    <ThemeToggle />
-  </header>
-
   <main id="main">
-    <div class="container-page pt-16 pb-20 md:pt-28 md:pb-32">
-      <p class="type-label"><span class="text-accent" aria-hidden="true">// </span>greater.boston</p>
-      <h1 class="type-display mt-6 max-w-[16ch]">I build systems that move money and data reliably.</h1>
-      <p class="type-h3 mt-8">Software Engineer, Data and Transaction Systems</p>
-      <p class="type-lead mt-4">
-        Software engineer with 3+ years building enterprise platforms that handle high-volume transactional and
-        operational data across telecommunications, payments, and internal business operations. Now focused on data
-        engineering: pipelines, data models, and cloud data platforms.
-      </p>
-    </div>
+    <Hero />
 
     <SectionShell id="about" label="01.about" heading="About">
       <div class="space-y-5">
@@ -34,23 +29,91 @@ import ThemeToggle from '../components/ThemeToggle.astro';
           the direction I am moving in now: pipelines, data models, and cloud data platforms, built with the same care
           for reliability as a payment system.
         </p>
+        <p class="text-ink max-w-(--measure) font-medium">{site.availability}</p>
       </div>
     </SectionShell>
 
     <SectionShell id="work" label="02.selected.work" heading="Selected Work">
-      <p class="type-label">Layout only. Built in Phase 4.</p>
+      <div class="space-y-4">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
     </SectionShell>
+
     <SectionShell id="experience" label="03.experience" heading="Experience">
-      <p class="type-label">Layout only. Built in Phase 4.</p>
+      <ol class="timeline">
+        {experience.map((entry) => <ExperienceEntry entry={entry} />)}
+      </ol>
     </SectionShell>
+
     <SectionShell id="skills" label="04.skills" heading="Skills, Education, Certifications">
-      <p class="type-label">Layout only. Built in Phase 4.</p>
+      <div class="space-y-12">
+        <div>
+          <h3 class="type-h3">Skills</h3>
+          <dl class="mt-4 space-y-3">
+            {
+              skills.map((skill) => (
+                <div class="grid gap-x-6 sm:grid-cols-[11rem_1fr]">
+                  <dt class="type-label pt-1">{skill.group}</dt>
+                  <dd class="text-muted">{skill.items}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+        <div class="grid gap-12 lg:grid-cols-2 lg:gap-8">
+          <div>
+            <h3 class="type-h3">Education</h3>
+            <ul class="mt-4 space-y-5">
+              {
+                education.map((item) => (
+                  <li>
+                    <p class="text-ink">{item.degree}</p>
+                    <p class="text-muted">{item.school}</p>
+                    <p class="type-label mt-1">{item.dates}</p>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <h3 class="type-h3">Certifications</h3>
+            <ul class="mt-4 space-y-5">
+              {
+                certifications.map((item) => (
+                  <li>
+                    <p class="text-ink">{item.name}</p>
+                    <p class="text-muted">{item.issuer}</p>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
     </SectionShell>
-    <SectionShell id="contact" label="05.contact" heading="Get in touch">
-      <p class="type-label">Layout only. Built in Phase 4.</p>
-    </SectionShell>
-    <SectionShell id="lab" label="06.lab" heading="Payment stream simulator">
+
+    <SectionShell id="lab" label="05.lab" heading="Payment stream simulator">
       <p class="type-label">Layout only. Built in Phase 6.</p>
+    </SectionShell>
+
+    <SectionShell id="contact" label="06.contact" heading="Get in touch">
+      <p class="type-body">
+        I am open to full-time Software Engineering and Data Engineering roles. Email is the best way to reach me.
+      </p>
+      <ul class="mt-8 space-y-3">
+        <li class="flex flex-wrap items-baseline gap-x-4">
+          <span class="type-label w-20">Email</span>
+          <a class="link min-w-0 break-all" href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li class="flex flex-wrap items-baseline gap-x-4">
+          <span class="type-label w-20">LinkedIn</span>
+          <a class="link min-w-0 break-all" href={site.linkedin}>{linkedinHandle}</a>
+        </li>
+        <li class="flex flex-wrap items-baseline gap-x-4">
+          <span class="type-label w-20">GitHub</span>
+          <a class="link min-w-0 break-all" href={site.github}>{githubHandle}</a>
+        </li>
+      </ul>
     </SectionShell>
   </main>
 </BaseLayout>

@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft && !data.upcoming);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { title, summary, status, stack, links } = project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${title}, Samuel Mahembe`} description={summary}>
+  <main id="main" class="container-page pt-12 pb-20 md:pt-20 md:pb-28">
+    <a href={withBase('#work')} class="nav-link type-label inline-flex min-h-11 items-center">Back to work</a>
+    <h1 class="type-page-title mt-4" style={`view-transition-name: project-${project.id}`}>{title}</h1>
+    <p class="type-lead mt-5">{summary}</p>
+
+    <div class="mt-12 grid gap-10 md:grid-cols-12 md:gap-8">
+      <aside class="space-y-7 md:order-2 md:col-span-4 md:col-start-9">
+        <div>
+          <h2 class="type-label text-ink!">Status</h2>
+          <p class="text-muted mt-2 text-[0.9375rem]">{status}</p>
+        </div>
+        <div>
+          <h2 class="type-label text-ink!">Stack</h2>
+          <ul class="type-label mt-2 space-y-1">
+            {stack.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        {
+          links.length > 0 && (
+            <div>
+              <h2 class="type-label text-ink!">Links</h2>
+              <ul class="mt-2 space-y-1">
+                {links.map((link) => (
+                  <li>
+                    <a class="link" href={link.url}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </aside>
+      <article class="prose min-w-0 md:order-1 md:col-span-8">
+        <Content />
+      </article>
+    </div>
+  </main>
+</BaseLayout>

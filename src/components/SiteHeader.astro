@@ -1,0 +1,89 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../data/site';
+import { withBase } from '../lib/paths';
+import { getResumeHref } from '../lib/resume';
+
+const resumeHref = getResumeHref();
+const links = site.nav.map((item) => ({ label: item.label, href: withBase(`#${item.hash}`) }));
+---
+
+<header class="site-header border-line bg-bg sticky top-0 z-40 border-b">
+  <div class="container-page flex h-16 items-center justify-between gap-6">
+    <a href={withBase()} class="nav-link text-ink! font-medium tracking-tight whitespace-nowrap">{site.name}</a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-5 md:flex lg:gap-7">
+      {links.map((link) => <a href={link.href} class="nav-link py-3 text-sm">{link.label}</a>)}
+      {resumeHref && <a href={resumeHref} class="nav-link py-3 text-sm">Resume</a>}
+    </nav>
+
+    <div class="-mr-3 flex items-center md:ml-0">
+      <ThemeToggle />
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="site-menu"
+        class="menu-toggle type-label text-ink! inline-flex h-11 cursor-pointer items-center px-3 md:hidden"
+      >
+        Menu
+      </button>
+    </div>
+  </div>
+
+  <div id="site-menu" data-menu hidden class="site-menu border-line bg-bg border-b md:hidden">
+    <nav aria-label="Mobile" class="container-page flex flex-col py-2">
+      {links.map((link) => <a href={link.href} class="nav-link flex min-h-11 items-center">{link.label}</a>)}
+      {resumeHref && <a href={resumeHref} class="nav-link flex min-h-11 items-center">Resume</a>}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-menu {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+  }
+
+  /* Without JavaScript the menu cannot open, so its links are always shown. */
+  :global(html:not([data-theme])) .site-header {
+    position: static;
+  }
+  :global(html:not([data-theme])) .menu-toggle {
+    display: none;
+  }
+  @media (width < 48rem) {
+    :global(html:not([data-theme])) .site-menu {
+      display: block;
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  function setMenu(open: boolean, returnFocus = false) {
+    const toggle = document.querySelector<HTMLElement>('[data-menu-toggle]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    if (!toggle || !menu) return;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Close' : 'Menu';
+    if (returnFocus) toggle.focus();
+  }
+
+  const isOpen = () => document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded') === 'true';
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element | null;
+    if (target?.closest('[data-menu-toggle]')) {
+      setMenu(!isOpen());
+    } else if (isOpen() && (target?.closest('[data-menu] a') || !target?.closest('[data-menu]'))) {
+      setMenu(false);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen()) setMenu(false, true);
+  });
+</script>

@@ -190,9 +190,155 @@
     transition: text-decoration-color var(--duration-ui) var(--ease-out);
   }
 
+  .type-page-title {
+    font-size: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  /* Markdown from the content collections. */
+  .prose {
+    color: var(--text-muted);
+    max-width: var(--measure);
+  }
+
+  .prose h2 {
+    margin-top: 2.5rem;
+    color: var(--text);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.012em;
+  }
+
+  .prose h2:first-child {
+    margin-top: 0;
+  }
+
+  .prose p {
+    margin-top: 0.75rem;
+  }
+
+  .prose ul {
+    display: grid;
+    gap: 0.5rem;
+    padding-left: 1.125rem;
+    list-style: disc;
+  }
+
+  .prose li::marker {
+    color: var(--text-faint);
+  }
+
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--text);
+  }
+
+  .card {
+    position: relative;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+
+  /* The title link stretches over the card, so the whole card is one target. */
+  .card-title-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .card-title-link:focus-visible {
+    outline: none;
+  }
+
+  .card-title-link:focus-visible::after {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .card-action {
+    color: var(--accent);
+  }
+
+  .timeline {
+    display: grid;
+    gap: 3.5rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--line-strong);
+  }
+
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 0.45rem;
+    left: -4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    transition: color var(--duration-ui) var(--ease-out);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.875rem;
+    padding-inline: 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-ui) var(--ease-out),
+      border-color var(--duration-ui) var(--ease-out),
+      transform 120ms var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-secondary {
+    border-color: var(--line-strong);
+    color: var(--text);
+  }
+
   @media (hover: hover) {
     .link:hover {
       text-decoration-color: var(--accent);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in oklch, var(--accent) 86%, var(--text));
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
     }
   }
 }
