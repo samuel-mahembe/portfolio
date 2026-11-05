@@ -5,7 +5,9 @@ import SectionShell from '../components/SectionShell.astro';
 import Hero from '../components/Hero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ExperienceEntry from '../components/ExperienceEntry.astro';
+import PaymentStream from '../components/lab/PaymentStream';
 import { site, skills, education, certifications } from '../data/site';
+import { withBase } from '../lib/paths';
 
 const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
 const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
@@ -93,7 +95,14 @@ const githubHandle = site.github.replace('https://', '');
     </SectionShell>
 
     <SectionShell id="lab" label="05.lab" heading="Payment stream simulator">
-      <p class="type-label">Layout only. Built in Phase 6.</p>
+      <p data-reveal class="type-label text-accent!">Simulated. All transactions are fake and generated in your browser.</p>
+      <p data-reveal class="type-body mt-3">
+        A live feed of made-up payment transactions. Each one gets a risk score from a simple rules and logistic-style
+        function, and flagged transactions show the reason.
+      </p>
+      <div class="mt-8">
+        <PaymentStream client:visible caseStudyHref={withBase('projects/payflow/')} />
+      </div>
     </SectionShell>
 
     <SectionShell id="contact" label="06.contact" heading="Get in touch">
